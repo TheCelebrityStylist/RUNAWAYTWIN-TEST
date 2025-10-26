@@ -44,3 +44,17 @@ export const StyleBriefSchema = z.object({
   vibe: z.string().optional(),
 });
 export type StyleBrief = z.infer<typeof StyleBriefSchema>;
+
+// --- Affiliate link schema & type ---
+export const AffiliateProgramEnum = z.enum(["amazon", "awin", "rakuten", "none"]);
+export type AffiliateProgram = z.infer<typeof AffiliateProgramEnum>;
+
+export const AffiliateLinkSchema = z.object({
+  affiliateUrl: z.string().url(),
+  program: AffiliateProgramEnum,
+  merchantId: z.string().default("unknown"),
+  nonAffiliate: z.boolean().default(false),
+  expiresAt: z.string().datetime().optional()
+});
+
+export type AffiliateLink = z.infer<typeof AffiliateLinkSchema>;
