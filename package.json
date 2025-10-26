@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+     "vercel-build": "next build", 
     "test": "vitest run",
     "e2e": "playwright test",
     "sitemap": "next-sitemap"
@@ -50,5 +51,6 @@
   },
   "engines": {
     "node": ">=18.17 <21"
+   "type": "module"
   }
 }
