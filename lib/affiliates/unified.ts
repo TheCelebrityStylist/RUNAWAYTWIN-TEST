@@ -1,11 +1,46 @@
-import { z } from "zod"; import { Product } from "../schemas";
-export type ProviderName = "amazon" | "rakuten" | "awin";
-export type UnifiedProduct = z.infer<typeof Product>;
-export type SearchParams = { query: string; category?: string; gender?: "female"|"male"|"unisex"; size?: string; color?: string; priceMin?: number; priceMax?: number; currency?: "EUR"|"USD"; region?: "EU"|"US"; };
-export type ProviderResult = { provider: ProviderName; items: UnifiedProduct[] };
-export interface Provider { name: ProviderName; enabled(): boolean; search(params: SearchParams): Promise<ProviderResult>; }
-export function rankProducts(items: UnifiedProduct[], query: string): UnifiedProduct[] {
-  const q=query.toLowerCase();
-  return items.map(p=>{let s=0; if(p.title.toLowerCase().includes(q)) s+=2; if((p.brand||'').toLowerCase().includes(q)) s+=1; if(p.availability==='in_stock') s+=2; if((p.rating||0)>4.2) s+=1; return {p,s};})
-    .sort((a,b)=>b.s-a.s).map(x=>x.p);
+// lib/affiliates/unified.ts
+import { z } from "zod";
+import { ProductSchema, type Product } from "../schemas";
+
+/**
+ * All supported provider names (include 'mock' so dev builds never break).
+ */
+export type ProviderName = "amazon" | "rakuten" | "awin" | "mock";
+
+/**
+ * Unified product type used across providers (inferred from Zod schema).
+ * IMPORTANT: Use ProductSchema here (a VALUE), not Product (a TYPE).
+ */
+export type UnifiedProduct = z.infer<typeof ProductSchema>;
+
+/**
+ * Search params accepted by providers. Keep liberal so callers can pass what they have.
+ */
+export type SearchParams = {
+  query?: string;
+  category?: string;
+  gender?: "female" | "male" | "unisex";
+  size?: string;
+  color?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  currency?: "EUR" | "USD";
+  limit?: number;
+};
+
+/**
+ * Provider search result envelope.
+ */
+export type ProviderResult = {
+  provider: ProviderName;
+  items: UnifiedProduct[];
+};
+
+/**
+ * Provider contract each adapter implements.
+ */
+export interface Provider {
+  name: ProviderName;
+  enabled(): boolean;
+  search(params: SearchParams): Promise<ProviderResult>;
 }
