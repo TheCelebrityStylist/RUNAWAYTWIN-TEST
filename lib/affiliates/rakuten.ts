@@ -1,0 +1,1 @@
+import { Provider, ProviderResult, SearchParams } from './unified'; export class RakutenProvider implements Provider{ name='rakuten' as const; enabled(){return !!process.env.RAKUTEN_API_KEY;} async search(p:SearchParams):Promise<ProviderResult>{ if(!this.enabled()) return {provider:this.name,items:[]}; return {provider:this.name,items:[]}; } }

@@ -1,0 +1,1 @@
+import { describe,it,expect } from 'vitest'; import { wrapAffiliate } from '@/lib/affiliates/linkWrapper'; describe('wrapAffiliate',()=>{ it('non-affiliate fallback',()=>{ const r=wrapAffiliate({url:'https://example.com'}); expect(r.program).toBe('none'); expect(r.affiliateUrl).toContain('utm_source=runwaytwin'); }); });

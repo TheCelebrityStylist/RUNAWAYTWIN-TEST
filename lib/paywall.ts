@@ -1,0 +1,1 @@
+import { cookies } from 'next/headers'; export function isPaid(){return cookies().get('rt_paid')?.value==='1';} export function markPaid(){cookies().set('rt_paid','1',{httpOnly:false,path:'/',sameSite:'lax',maxAge:31536000});}

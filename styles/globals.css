@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { --bg: #FBFBF6; --text: #433633; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--text); }
+.focus-ring:focus-visible { outline: 3px solid #DE7600; outline-offset: 2px; }
+.container { @apply max-w-5xl mx-auto px-4; }

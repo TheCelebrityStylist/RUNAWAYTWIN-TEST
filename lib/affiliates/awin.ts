@@ -1,0 +1,1 @@
+import { Provider, ProviderResult, SearchParams } from './unified'; export class AwinProvider implements Provider{ name='awin' as const; enabled(){return !!process.env.AWIN_API_TOKEN;} async search(p:SearchParams):Promise<ProviderResult>{ if(!this.enabled()) return {provider:this.name,items:[]}; return {provider:this.name,items:[]}; } }

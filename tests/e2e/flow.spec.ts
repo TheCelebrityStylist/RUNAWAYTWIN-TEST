@@ -1,0 +1,1 @@
+import { test, expect } from '@playwright/test'; test('quiz → generate → export', async ({ page }) => { await page.goto('/quiz'); await page.getByRole('button',{name:'Generate Looks'}).click(); await page.waitForSelector('text=Your Looks'); await expect(page.getByText('Your Looks')).toBeVisible(); await page.getByRole('button',{name:'Export PDF'}).first().click(); });
