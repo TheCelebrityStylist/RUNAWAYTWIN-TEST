@@ -1,1 +1,1 @@
-export default function Privacy(){return(<div className='prose max-w-3xl'><h1>Privacy Policy</h1><p>We store your brief and saved outfits to deliver the service. Request deletion anytime.</p></div>);}
+export default function Privacy(){return (<div className='card' style={{padding:24}}><h1>Privacy</h1><p>We store the minimum necessary data to provide the service.</p></div>);}

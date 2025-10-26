@@ -1,1 +1,1 @@
-export default function Terms(){return(<div className='prose max-w-3xl'><h1>Terms & Conditions</h1><p>Non-advisory fashion guidance; affiliate relationships may exist.</p></div>);}
+export default function Terms(){return (<div className='card' style={{padding:24}}><h1>Terms</h1><p>Fashion guidance is informational only; affiliate links may earn a commission.</p></div>);}
